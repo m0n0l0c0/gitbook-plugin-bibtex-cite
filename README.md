@@ -9,7 +9,7 @@ Add this to your `book.json`, then run `gitbook install`:
 
 ```
 {
-    "plugins": ["bibtex-cite"]
+    "plugins": ["bibtex-indexed-cite"]
 }
 ```
 
@@ -61,6 +61,8 @@ You can also add a table of references with:
 (For example, you could put that at the bottom of each page).
 
 Only used literature is included in the table of references. They are ordered by the usage within the text.
+
+Citations are numbered by their index in the literature.bib file and will appear in the same order in your references page
 
 ### Limitations
 
