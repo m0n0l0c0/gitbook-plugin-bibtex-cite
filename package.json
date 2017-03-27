@@ -3,7 +3,7 @@
   "description": "Bibtex citations for GitBook",
   "author": "Manuel Mitasch, Duane Johnson, Basil Vetas",
   "main": "index.js",
-  "version": "1.1.1",
+  "version": "1.1.4",
   "engines": {
     "gitbook": ">2.x.x"
   },

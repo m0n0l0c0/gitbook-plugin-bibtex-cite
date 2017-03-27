@@ -58,7 +58,9 @@ You can also add a table of references with:
 {% references %} {% endreferences %}
 ```
 
-(For example, you could put that at the bottom of each page).
+The table of references should be included in a file called References.md
+
+If you name the file anything other than References.md, it will break the links from the individual citations to this references page (currently, each citation will link to References.html#cite- plus the index of that citation)
 
 Only used literature is included in the table of references. They are ordered by the usage within the text.
 

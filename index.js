@@ -13,12 +13,16 @@ module.exports = {
     filters: {
         cite: function(key) {
             var citation = _.find(this.config.get('bib'), {'citationKey': key.toUpperCase()});
-            
+
+            console.log("*************************");
+            console.log(this.file.path);
+            console.log("*************************");
+
             if (citation !== undefined) {
                 
                 var index = _.indexOf(this.config.get('bib'), citation) + 1;    
                                                     
-                return '<a href="citations.html#cite-' + index + '">[' + index + ']</a>';
+                return '<a href="../References.html#cite-' + index + '">[' + index + ']</a>';
             } else {
                 return "[Citation not found]";
             }
