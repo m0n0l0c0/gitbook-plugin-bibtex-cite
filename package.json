@@ -3,9 +3,18 @@
   "description": "Bibtex citations for GitBook",
   "author": "Manuel Mitasch, Duane Johnson, Basil Vetas",
   "main": "index.js",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "engines": {
     "gitbook": ">2.x.x"
+  },
+  "gitbook": {
+    "properties": {
+      "path": {
+          "type": "string",
+          "description": "the url path of the gitbook",
+          "required": true
+      }
+    }
   },
   "homepage": "https://github.com/WorldAfterCapital/gitbook-plugin-bibtex-cite",
   "repository": {

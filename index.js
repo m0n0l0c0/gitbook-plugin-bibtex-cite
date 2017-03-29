@@ -5,24 +5,21 @@ var fs = require('fs');
 module.exports = {
     book: {
         assets: './assets',
-        css: [
-            "style.css"
-        ]
+        css: ["style.css"]
     },
 
     filters: {
         cite: function(key) {
             var citation = _.find(this.config.get('bib'), {'citationKey': key.toUpperCase()});
 
-            console.log("*************************");
-            console.log(this.file.path);
-            console.log("*************************");
+            var path = this.config.get('pluginsConfig')['bibtex-indexed-cite'].path;            
 
             if (citation !== undefined) {
                 
                 var index = _.indexOf(this.config.get('bib'), citation) + 1;    
-                                                    
-                return '<a href="../References.html#cite-' + index + '">[' + index + ']</a>';
+                                
+                return '<a href="' + path + 'References.html#cite-' + index + '">[' + index + ']</a>';
+
             } else {
                 return "[Citation not found]";
             }
