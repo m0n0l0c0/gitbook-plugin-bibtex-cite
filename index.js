@@ -18,8 +18,6 @@ module.exports = {
       const upperKey = key.toUpperCase()
       const citation = find(this.config.get('bib'), {'citationKey': upperKey})
 
-      const path = this.config.get('pluginsConfig')['bibtex-indexed-cite'].path            
-
       if (citation !== undefined) {
 
         var index = currBib.indexOf(upperKey)
@@ -30,15 +28,15 @@ module.exports = {
           index++
         }
 
-        // This path should probably not be here
-        ret = `<a href="${path}References.html#cite-${index}">[${index}]</a>`
+        ret = `<a href="References.html#cite-${index}">[${index}]</a>`
       }
       return ret
     }
   },
   hooks: {
     init: function() {
-      const bib = fs.readFileSync('literature.bib', 'utf8')
+      const path = this.config.get('pluginsConfig')['citation-bibtex'].path || './literature.bib'
+      const bib = fs.readFileSync(path, 'utf8')
       this.config.set('bib', bibtexParse.toJSON(bib))
       currBib = []
     }
