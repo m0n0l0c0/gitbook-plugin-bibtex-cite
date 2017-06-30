@@ -1,6 +1,6 @@
 'use strict'
 
-const bibtexParse = require('bibtex-parser-js')
+const parse = require('bib2json')
 const fs = require('fs')
 
 let currBib = []
@@ -15,14 +15,13 @@ module.exports = {
 
       let ret = "[Citation not found]"
 
-      const upperKey = key.toUpperCase()
-      const citation = find(this.config.get('bib'), {'citationKey': upperKey})
+      const citation = find(this.config.get('bib'), {'EntryKey': key})
 
       if (citation !== undefined) {
 
-        var index = currBib.indexOf(upperKey)
+        var index = currBib.indexOf(key)
         if (index === -1) {
-          currBib.push(upperKey)
+          currBib.push(key)
           index = currBib.length
         }else{
           index++
@@ -37,7 +36,7 @@ module.exports = {
     init: function() {
       const path = this.config.get('pluginsConfig')['citation-bibtex'].path || './literature.bib'
       const bib = fs.readFileSync(path, 'utf8')
-      this.config.set('bib', bibtexParse.toJSON(bib))
+      this.config.set('bib', parse(bib).entries)
       currBib = []
     }
   },
@@ -54,35 +53,30 @@ module.exports = {
 
         currBib.forEach(function(cite, idx) {
 
-          const item = find(bib, { citationKey: cite })
+          const item = find(bib, { EntryKey: cite }).Fields
           const index = idx + 1
+          const fields = []
 
           result += `<tr><td><span class="citation-number" id="cite-${index}">${index}</span></td><td>`
 
-          if (item.entryTags.AUTHOR) {
-            result += formatAuthors(item.entryTags.AUTHOR) + ', '
+          if (item.author) {
+            fields.push(formatAuthors(item.author))
           }
-          if (item.entryTags.TITLE) {
-            if (item.entryTags.URL) {
-              result += `<a href="${item.entryTags.URL}">${item.entryTags.TITLE}</a>, `
+          if (item.title) {
+            if (item.url) {
+              fields.push(`<a href="${item.url}">${item.title}</a>`)
             } else {
-              result += item.entryTags.TITLE + ', '
+              fields.push(item.title)
             }
           }
-          if (item.entryTags.BOOKTITLE) {
-            if (item.entryTags.BOOKURL) {
-              result += `<a href="${item.entryTags.BOOKURL}">${item.entryTags.BOOKTITLE}</a>, `
-            } else {
-              result += `<i>${item.entryTags.BOOKTITLE}</i>, `
-            }
+          if (item.publisher) {
+            fields.push(`<i>${item.publisher}</i>`)
           }
-          if (item.entryTags.PUBLISHER) {
-            result += `<i>${item.entryTags.PUBLISHER}</i>, `
-          }
-          if (item.entryTags.YEAR) {
-            result += item.entryTags.YEAR + '.'
+          if (item.year) {
+            fields.push(item.year)
           }
 
+          result += fields.join(', ') + '.'
           result += '</td></tr>'
         })
 

@@ -3,7 +3,7 @@
   "description": "Bibtex citations for GitBook",
   "author": "Guillermo Blanco",
   "main": "index.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "gitbook": "*"
   },
@@ -24,7 +24,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bibtex-parser-js": "0.0.2"
+    "bib2json": "0.0.1"
   },
   "scripts": {}
 }
