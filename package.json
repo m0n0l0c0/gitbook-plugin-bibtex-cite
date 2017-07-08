@@ -3,7 +3,7 @@
   "description": "Bibtex citations for GitBook",
   "author": "Guillermo Blanco",
   "main": "index.js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "engines": {
     "gitbook": "*"
   },

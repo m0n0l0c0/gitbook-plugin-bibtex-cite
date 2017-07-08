@@ -75,6 +75,9 @@ module.exports = {
           if (item.year) {
             fields.push(item.year)
           }
+          if (item.urldate) {
+            fields.push(`[${item.urldate}]`)
+          }
 
           result += fields.join(', ') + '.'
           result += '</td></tr>'
